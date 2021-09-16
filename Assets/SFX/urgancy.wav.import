@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/urgancy.wav-acc1dc47c3605e70989e67f3d105f1a1.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/urgancy.wav"
+dest_files=[ "res://.import/urgancy.wav-acc1dc47c3605e70989e67f3d105f1a1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=true
+compress/mode=0

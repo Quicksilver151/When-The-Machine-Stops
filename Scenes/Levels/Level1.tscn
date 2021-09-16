@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Levels/LevelCode/Level1.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/chair.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/desk.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 4 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 28, 4 )
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 16, 0, 16, 400, 256, 400, 256, 464, 16, 464, 16, 592, 1008, 592, 1008, 464, 768, 464, 768, 400, 1008, 400, 1008, 0, 1040, 0, 1040, 400, 1040, 464, 1040, 592, 1040, 624, 1008, 624, 16, 624, -16, 624, -16, 592, -16, 464, -16, 400, -16, 0 )
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+color = Color( 0.454902, 0.454902, 0.454902, 1 )
+polygon = PoolVector2Array( 16, 0, 16, 400, 256, 400, 256, 464, 16, 464, 16, 592, 1008, 592, 1008, 464, 768, 464, 768, 400, 1008, 400, 1008, 0 )
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Chair" type="RigidBody2D" parent="Decor"]
+position = Vector2( 480, 532 )
+mode = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="chair" type="Sprite" parent="Decor/Chair"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/Chair"]
+position = Vector2( 0, 36 )
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Decor/Chair"]
+position = Vector2( -12, -24 )
+shape = SubResource( 2 )
+one_way_collision = true
+
+[node name="Desk" type="RigidBody2D" parent="Decor" groups=[
+"movable",
+]]
+position = Vector2( 544, 552 )
+mode = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="desk" type="Sprite" parent="Decor/Desk"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/Desk"]
+shape = SubResource( 3 )
+one_way_collision = true
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 357, 456 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 9280.0
+margin_top = 288.0
+margin_right = 9648.0
+margin_bottom = 848.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

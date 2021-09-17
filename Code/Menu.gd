@@ -13,7 +13,7 @@ func _on_Play_pressed():
 
 
 func _on_Settings_pressed():
-	pass
+	SceneChanger.change_scene("res://Scenes/Info.tscn")
 
 
 func _on_Exit_pressed():

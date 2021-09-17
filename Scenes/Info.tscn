@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Fonts/FontResources/Kenney Future Narrow.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Fonts/MenuButtonContainerFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scenes/Levels/LevelCode/Info.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Fonts/FontResources/VarelaRound-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="Info" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.454902, 0.454902, 0.454902, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+margin_right = 184.0
+margin_bottom = 61.0
+size_flags_horizontal = 2
+size_flags_vertical = 5
+custom_styles/focus = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+flat = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 163.0
+margin_right = 1024.0
+margin_bottom = 482.0
+size_flags_vertical = 6
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][b]CONTROLS[/b]
+
+Arrow keys / WASD = movement
+
+x / enter = interract
+
+z / shift = pick up"
+text = "CONTROLS
+
+Arrow keys / WASD = movement
+
+x / enter = interract
+
+z / shift = pick up"
+fit_content_height = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 585.0
+margin_right = 1024.0
+margin_bottom = 600.0
+text = "Version 0.1.0"
+fit_content_height = true
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]

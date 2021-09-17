@@ -1,20 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Code/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Themes/MenuButtonContainer.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Fonts/FontResources/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Fonts/MenuButtonContainerFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/Sprites/Circle.svg" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/LargeTextures/Machine.png" type="Texture" id=6]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.444882, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 64
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 3 )
 
 [node name="Menu" type="MarginContainer"]
 anchor_right = 1.0
@@ -52,24 +46,24 @@ custom_constants/separation = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 227.0
+margin_bottom = 214.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="When" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_top = 77.0
+margin_top = 79.0
 margin_right = 369.0
-margin_bottom = 149.0
+margin_bottom = 134.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "When the"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 margin_left = 373.0
 margin_right = 742.0
-margin_bottom = 227.0
+margin_bottom = 214.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 6 )
@@ -78,46 +72,45 @@ stretch_mode = 5
 
 [node name="Stops" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 746.0
-margin_top = 77.0
+margin_top = 79.0
 margin_right = 1024.0
-margin_bottom = 149.0
+margin_bottom = 134.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.75
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "Stops"
 align = 1
 
 [node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
-margin_left = 444.0
-margin_top = 271.0
-margin_right = 580.0
-margin_bottom = 441.0
+margin_left = 426.0
+margin_top = 230.0
+margin_right = 598.0
+margin_bottom = 477.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme = ExtResource( 2 )
-custom_constants/separation = 16
+custom_constants/separation = 32
 
 [node name="Play" type="Button" parent="VBoxContainer/Buttons"]
-margin_right = 136.0
-margin_bottom = 46.0
+margin_right = 172.0
+margin_bottom = 61.0
 focus_mode = 0
 text = "Play"
 flat = true
 
-[node name="Settings" type="Button" parent="VBoxContainer/Buttons"]
-margin_top = 62.0
-margin_right = 136.0
-margin_bottom = 108.0
-focus_mode = 0
-text = "Settings"
+[node name="Info" type="Button" parent="VBoxContainer/Buttons"]
+margin_top = 93.0
+margin_right = 172.0
+margin_bottom = 154.0
+text = "Info"
 flat = true
 
 [node name="Exit" type="Button" parent="VBoxContainer/Buttons"]
-margin_top = 124.0
-margin_right = 136.0
-margin_bottom = 170.0
+margin_top = 186.0
+margin_right = 172.0
+margin_bottom = 247.0
 focus_mode = 0
 text = "Exit"
 flat = true
@@ -132,5 +125,5 @@ text = "Version 0.1.0"
 fit_content_height = true
 
 [connection signal="pressed" from="VBoxContainer/Buttons/Play" to="." method="_on_Play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Buttons/Settings" to="." method="_on_Settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Buttons/Info" to="." method="_on_Settings_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buttons/Exit" to="." method="_on_Exit_pressed"]

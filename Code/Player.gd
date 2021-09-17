@@ -12,7 +12,7 @@ func _ready():
 func _physics_process(delta):
 	
 	platformer_movement(delta)
-
+	
 
 # behaviour functions
 func platformer_movement(delta):
@@ -21,6 +21,9 @@ func platformer_movement(delta):
 	
 	# movement
 	velocity.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))*speed
+	
+	if SceneChanger.processing:
+		velocity.x = 0
 	
 	# idle anim
 	if is_on_floor():

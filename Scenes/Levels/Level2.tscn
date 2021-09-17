@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Levels/LevelCode/Level2.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/door.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 80 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 64, 74 )
 
 [node name="Level2" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -22,20 +31,38 @@ polygon = PoolVector2Array( 256, 336, 256, 592, 768, 592, 768, 336 )
 [node name="Polygon2D3" type="Polygon2D" parent="StaticBody2D/Room"]
 position = Vector2( 0, -48 )
 color = Color( 0.554688, 0.554688, 0.554688, 1 )
-polygon = PoolVector2Array( 256, 384, 48, 352, 48, 208, 976, 208, 976, 352, 768, 384 )
+polygon = PoolVector2Array( 256, 384, 48, 352, 48, 208, 976, 208, 768, 384 )
 
 [node name="Polygon2D4" type="Polygon2D" parent="StaticBody2D/Room"]
 position = Vector2( 0, -48 )
 color = Color( 0.355469, 0.355469, 0.355469, 1 )
-polygon = PoolVector2Array( 976, 352, 1008, 352, 1008, 368, 976, 368, 768, 400, 256, 400, 48, 368, 16, 368, 16, 352, 48, 352, 256, 384, 768, 384 )
+polygon = PoolVector2Array( 976, 208, 1008, 208, 1008, 224, 976, 224, 768, 400, 256, 400, 48, 368, 16, 368, 16, 352, 48, 352, 256, 384, 768, 384 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( 16, 160, 640, 160, 640, 128, 16, 128, -16, 128, -16, 160, -16, 304, -16, 320, -16, 592, -16, 624, 16, 624, 1008, 624, 1040, 624, 1040, 592, 1040, 160, 1040, 128, 1008, 128, 656, 128, 656, 160, 1008, 160, 1008, 304, 976, 304, 768, 336, 768, 352, 976, 320, 1008, 320, 1008, 592, 16, 592, 16, 320, 48, 320, 256, 352, 256, 336, 48, 304, 16, 304 )
+polygon = PoolVector2Array( 16, 160, 640, 160, 640, 128, 16, 128, -16, 128, -16, 160, -16, 304, -16, 320, -16, 592, -16, 624, 16, 624, 1008, 624, 1040, 624, 1040, 592, 1040, 160, 1040, 128, 1008, 128, 656, 128, 656, 160, 976, 160, 768, 336, 768, 352, 976, 320, 1008, 320, 1008, 592, 16, 592, 16, 320, 48, 320, 256, 352, 256, 336, 48, 304, 16, 304 )
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2( 512, 336 )
 polygon = PoolVector2Array( -256, 0, 256, 0, 256, 16, -256, 16 )
 one_way_collision = true
 
+[node name="PrevLevel" type="Area2D" parent="."]
+position = Vector2( 16, 240 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrevLevel"]
+shape = SubResource( 1 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 48, 256 )
+position = Vector2( 80, 256 )
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2( 512, 522 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource( 9 )
+
+[node name="door" type="Sprite" parent="Exit"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[connection signal="body_entered" from="PrevLevel" to="." method="_on_PrevLevel_body_entered"]

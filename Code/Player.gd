@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var player_name = "Kuno"
 var velocity = Vector2.ZERO
 export (int,0,500,2) var speed = 300
 onready var state_machine = $AnimationTree.get("parameters/playback")
@@ -21,9 +22,12 @@ func platformer_movement(delta):
 	# movement
 	velocity.x = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))*speed
 	
-	
+	# idle anim
 	if is_on_floor():
-		state_machine.travel("idle")
+		state_machine.travel("run")
+		if velocity.x == 0:
+			state_machine.travel("idle")
+		
 	
 	# jump
 	if Input.is_action_pressed("f_jump") and is_on_floor():
@@ -32,12 +36,17 @@ func platformer_movement(delta):
 		state_machine.travel("jump")
 		jump()
 	
+	# move down a platform
+	if Input.is_action_pressed("ui_down"):
+		position.y += 1
+	
+	
 	# fall anim
-	if not is_on_floor():
+	if velocity.y > 10 and not is_on_floor():
 		state_machine.travel("fall")
 	
 	# move and slide function
-	velocity = move_and_slide(velocity,Vector2.UP)
+	velocity = move_and_slide(velocity, Vector2.UP, false, 4, 0.785398, false)
 	
 
 func jump():

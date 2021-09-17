@@ -1,73 +1,164 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Levels/LevelCode/Level1.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/chair.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sprites/desk.png" type="Texture" id=4]
+[ext_resource path="res://Code/Movable.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Sprites/door.png" type="Texture" id=6]
+[ext_resource path="res://Objects/MovableObject.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 528, 16 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 8 )
+extents = Vector2( 24, 44 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 4 )
+extents = Vector2( 28, 22 )
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 28, 22 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 8 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 8, 4 )
+
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 28, 4 )
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 65.9697
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 64, 74 )
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( 16, 0, 16, 400, 256, 400, 256, 464, 16, 464, 16, 592, 1008, 592, 1008, 464, 768, 464, 768, 400, 1008, 400, 1008, 0, 1040, 0, 1040, 400, 1040, 464, 1040, 592, 1040, 624, 1008, 624, 16, 624, -16, 624, -16, 592, -16, 464, -16, 400, -16, 0 )
+polygon = PoolVector2Array( 256, 336, 16, 336, 16, 592, 1008, 592, 1008, 336, 768, 336, 976, 304, 1040, 304, 1040, 160, 544, 160, 544, 128, 1184, 128, 1184, 336, 1040, 336, 1040, 592, 1040, 624, 1008, 624, 16, 624, -16, 624, -16, 592, -16, 336, -16, 128, 480, 128, 480, 160, 16, 160 )
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+[node name="Room" type="Node2D" parent="StaticBody2D"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/Room"]
 color = Color( 0.454902, 0.454902, 0.454902, 1 )
-polygon = PoolVector2Array( 16, 0, 16, 400, 256, 400, 256, 464, 16, 464, 16, 592, 1008, 592, 1008, 464, 768, 464, 768, 400, 1008, 400, 1008, 0 )
+polygon = PoolVector2Array( 16, 160, 16, 400, 16, 464, 16, 592, 1008, 592, 1008, 464, 1008, 400, 1008, 160 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="StaticBody2D/Room"]
+color = Color( 0.390625, 0.390625, 0.390625, 1 )
+polygon = PoolVector2Array( 256, 336, 256, 592, 768, 592, 768, 336 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="StaticBody2D/Room"]
+position = Vector2( 0, -48 )
+color = Color( 0.554688, 0.554688, 0.554688, 1 )
+polygon = PoolVector2Array( 256, 384, 16, 208, 976, 208, 976, 352, 768, 384 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="StaticBody2D/Room"]
+position = Vector2( 0, -48 )
+color = Color( 0.355469, 0.355469, 0.355469, 1 )
+polygon = PoolVector2Array( 976, 352, 1008, 352, 1008, 368, 976, 368, 768, 400, 256, 400, 16, 224, 16, 208, 256, 384, 768, 384 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 512, 352 )
+shape = SubResource( 7 )
+one_way_collision = true
 
 [node name="Decor" type="Node2D" parent="."]
 
-[node name="Chair" type="RigidBody2D" parent="Decor"]
-position = Vector2( 480, 532 )
-mode = 1
+[node name="WorldCollisions" type="Node2D" parent="Decor"]
+
+[node name="Chair" type="RigidBody2D" parent="Decor/WorldCollisions"]
+position = Vector2( 128, 544 )
+collision_layer = 2
+collision_mask = 2
+mode = 2
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="chair" type="Sprite" parent="Decor/Chair"]
-scale = Vector2( 4, 4 )
-texture = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/Chair"]
-position = Vector2( 0, 36 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Chair"]
 shape = SubResource( 1 )
-one_way_collision = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Decor/Chair"]
-position = Vector2( -12, -24 )
-shape = SubResource( 2 )
-one_way_collision = true
+[node name="Area2D" type="Area2D" parent="Decor/WorldCollisions/Chair"]
 
-[node name="Desk" type="RigidBody2D" parent="Decor" groups=[
-"movable",
-]]
-position = Vector2( 544, 552 )
-mode = 1
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Chair/Area2D"]
+shape = SubResource( 1 )
+
+[node name="Desk" type="RigidBody2D" parent="Decor/WorldCollisions"]
+position = Vector2( 208, 569 )
+collision_layer = 2
+collision_mask = 2
+mode = 2
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="desk" type="Sprite" parent="Decor/Desk"]
-scale = Vector2( 4, 4 )
-texture = ExtResource( 4 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Desk"]
+shape = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/Desk"]
+[node name="Area2D" type="Area2D" parent="Decor/WorldCollisions/Desk"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Desk/Area2D"]
 shape = SubResource( 3 )
+
+[node name="PlayerCollisions" type="Node2D" parent="Decor"]
+
+[node name="Chair" parent="Decor/PlayerCollisions" instance=ExtResource( 9 )]
+position = Vector2( 128, 544 )
+sprite = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/PlayerCollisions/Chair"]
+position = Vector2( 0, 20 )
+shape = SubResource( 4 )
 one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Decor/PlayerCollisions/Chair"]
+position = Vector2( -12, -40 )
+shape = SubResource( 5 )
+one_way_collision = true
+
+[node name="Desk" parent="Decor/PlayerCollisions" instance=ExtResource( 9 )]
+position = Vector2( 208, 569 )
+sprite = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/PlayerCollisions/Desk"]
+position = Vector2( 0, -18 )
+shape = SubResource( 6 )
+one_way_collision = true
+
+[node name="NextLevel" type="Area2D" parent="."]
+position = Vector2( 1040, 240 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NextLevel"]
+shape = SubResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 357, 456 )
+position = Vector2( 416, 544 )
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2( 512, 522 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+shape = SubResource( 9 )
+
+[node name="door" type="Sprite" parent="Exit"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
 
 [node name="Button" type="Button" parent="."]
 margin_left = 9280.0
@@ -78,4 +169,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="body_entered" from="NextLevel" to="." method="_on_NextLevel_body_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

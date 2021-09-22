@@ -8,25 +8,25 @@
 [ext_resource path="res://Assets/Sprites/door.png" type="Texture" id=6]
 [ext_resource path="res://Objects/MovableObject.tscn" type="PackedScene" id=9]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 528, 16 )
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 44 )
-
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 28, 22 )
+extents = Vector2( 24, 44 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 28, 22 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 24, 8 )
+extents = Vector2( 28, 22 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8, 4 )
+extents = Vector2( 24, 8 )
 
 [sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 8, 4 )
+
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 28, 4 )
 
 [sub_resource type="CircleShape2D" id=8]
@@ -43,7 +43,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( 256, 336, 16, 336, 16, 592, 1008, 592, 1008, 336, 768, 336, 976, 304, 1040, 304, 1040, 160, 544, 160, 544, 128, 1184, 128, 1184, 336, 1040, 336, 1040, 592, 1040, 624, 1008, 624, 16, 624, -16, 624, -16, 592, -16, 336, -16, 128, 480, 128, 480, 160, 16, 160 )
+polygon = PoolVector2Array( 256, 336, 16, 336, 16, 592, 1008, 592, 1008, 336, 976, 336, 768, 336, 976, 304, 1008, 304, 1040, 304, 1040, 160, 544, 160, 544, 128, 1040, 128, 1184, 128, 1184, 160, 1184, 304, 1184, 336, 1040, 336, 1040, 592, 9824, 592, 9824, 384, 9856, 384, 9856, 592, 9856, 624, 9824, 624, 1040, 624, 1008, 624, 16, 624, -16, 624, -16, 592, -16, 336, -16, 160, -16, 128, -16, -224, -16, -256, 16, -256, 128, -256, 128, -224, 16, -224, 16, 128, 480, 128, 480, 160, 16, 160 )
 
 [node name="Room" type="Node2D" parent="StaticBody2D"]
 __meta__ = {
@@ -70,7 +70,7 @@ polygon = PoolVector2Array( 976, 352, 1008, 352, 1008, 368, 976, 368, 768, 400, 
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 512, 352 )
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 one_way_collision = true
 
 [node name="Decor" type="Node2D" parent="."]
@@ -88,12 +88,12 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Chair"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="Decor/WorldCollisions/Chair"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Chair/Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Desk" type="RigidBody2D" parent="Decor/WorldCollisions"]
 position = Vector2( 208, 569 )
@@ -106,12 +106,12 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Desk"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="Decor/WorldCollisions/Desk"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/WorldCollisions/Desk/Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="PlayerCollisions" type="Node2D" parent="Decor"]
 
@@ -121,12 +121,12 @@ sprite = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/PlayerCollisions/Chair"]
 position = Vector2( 0, 20 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 one_way_collision = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Decor/PlayerCollisions/Chair"]
 position = Vector2( -12, -40 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 one_way_collision = true
 
 [node name="Desk" parent="Decor/PlayerCollisions" instance=ExtResource( 9 )]
@@ -135,7 +135,7 @@ sprite = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Decor/PlayerCollisions/Desk"]
 position = Vector2( 0, -18 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 one_way_collision = true
 
 [node name="NextLevel" type="Area2D" parent="."]
